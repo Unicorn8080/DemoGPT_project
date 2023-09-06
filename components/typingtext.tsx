@@ -6,26 +6,29 @@ interface MyComponentProps {
 
 const TypingText: React.FC<MyComponentProps> = () => {
   return (
-    <div>
-      <TypeAnimation
-        sequence={[
-        // Same substring at the start will only be typed out once, initially
-        'Build A Blog Post Writer',
-        2000, // wait 1s before replacing "Mice" with "Hamsters"
-        'Build A Chatbot',
-        2000,
-        'Build A PDF Analyzer Bot',
-        2000,
-        'Build A Grammar Corrector',
-        2000,
-        'Build A Translator',
-        2000
-      ]}
-      wrapper="span"
-      speed={30}
-      style={{ fontFamily: 'arial', fontWeight: "900",fontSize: '3em', display: 'inline-block' }}
-      repeat={Infinity}
-      />
+    <div style={{display: 'flex'}}>
+      <h1 style={{fontSize:'3em', display: 'inline-block' , fontWeight:'900' , fontFamily:'arial'}}>
+        <span style={{color: '#5d5dff'}}>Build A</span>
+        <TypeAnimation
+          sequence={[
+          // Same substring at the start will only be typed out once, initially
+          ' Blog Post Writer',
+          2000, // wait 1s before replacing "Mice" with "Hamsters"
+          ' Chatbot',
+          2000,
+          ' PDF Analyzer Bot',
+          2000,
+          ' Grammar Corrector',
+          2000,
+          ' Translator',
+          2000
+        ]}
+        wrapper="span"
+        speed={30}
+        // style={{ fontFamily: 'arial', fontWeight: "900",fontSize: '3em', display: 'inline-block' }}
+        repeat={Infinity}
+        />
+      </h1>
     </div>
   );
 }
