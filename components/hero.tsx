@@ -1,5 +1,12 @@
-import VideoThumb from '@/public/images/hero-image-01.jpg'
-import ModalVideo from '@/components/modal-video'
+'use client';
+import VideoThumb from '@/public/images/hero-image-01.jpg';
+import ModalVideo from '@/components/modal-video';
+import TypingText from './typingtext';
+import Link from 'next/link'
+import { TypeAnimation } from 'react-type-animation';
+
+
+
 
 export default function Hero() {
   return (
@@ -20,22 +27,29 @@ export default function Hero() {
         </div>
 
         {/* Hero content */}
-        <div className="relative pt-32 pb-10 md:pt-40 md:pb-16">
+        <div className="relative pt-32 pb-10 md:pt-10 md:pb-16">
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h1 mb-4" data-aos="fade-up">Landing template for startups</h1>
-            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
+            <h1 className="h1 mb-4 text-6xl" data-aos="fade-up">DemoGPT</h1>
+            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">Turn a Static Prompt into a Dynamic Product</p>
+            <div className="mb-4 text-left pt-40">
+              <TypingText />
+            </div>
+            <p className="text-xl text-gray-400 mb-8 text-left" data-aos="fade-up" data-aos-delay="200">
+              Unlock a Universe of 1,000+ LLM Apps on One Pay-As-You-Go Platform
+              Plus, Create Your Own App and Earn Money Every Time It's Used!
+            </p> 
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
-                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Start free trial</a>
+                <Link className="btn text-3xl rounded-xl text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="/dashboard">Create an App</Link>
               </div>
-              <div data-aos="fade-up" data-aos-delay="600">
+              {/* <div data-aos="fade-up" data-aos-delay="600">
                 <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Learn more</a>
-              </div>
+              </div> */}
             </div>
           </div>
-
+          
           <ModalVideo
             thumb={VideoThumb}
             thumbWidth={1024}
