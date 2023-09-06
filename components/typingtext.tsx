@@ -10,19 +10,19 @@ const TypingText: React.FC<MyComponentProps> = () => {
       <TypeAnimation
         sequence={[
         // Same substring at the start will only be typed out once, initially
-        'Blog Post Writer',
-        1000, // wait 1s before replacing "Mice" with "Hamsters"
-        'Chatbot',
-        1000,
-        'PDF Analyzer Bot',
-        1000,
-        'Grammar Corrector',
-        1000,
-        'Translator',
-        1000
+        'Build A Blog Post Writer',
+        2000, // wait 1s before replacing "Mice" with "Hamsters"
+        'Build A Chatbot',
+        2000,
+        'Build A PDF Analyzer Bot',
+        2000,
+        'Build A Grammar Corrector',
+        2000,
+        'Build A Translator',
+        2000
       ]}
       wrapper="span"
-      speed={50}
+      speed={30}
       style={{ fontFamily: 'arial', fontWeight: "900",fontSize: '3em', display: 'inline-block' }}
       repeat={Infinity}
       />

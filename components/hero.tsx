@@ -31,14 +31,13 @@ export default function Hero() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h1 mb-4 text-6xl" data-aos="fade-up">DemoGPT</h1>
-            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">Turn a Static Prompt into a Dynamic Product</p>
+            <h1 className="h1 mb-4 mt-20 text-7xl" data-aos="fade-up">DemoGPT</h1>
+            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">Turn a Static Prompt into a Dynamic Product with No Code</p>
             <div className="mb-4 text-left pt-40">
               <TypingText />
             </div>
             <p className="text-xl text-gray-400 mb-8 text-left" data-aos="fade-up" data-aos-delay="200">
-              Unlock a Universe of 1,000+ LLM Apps on One Pay-As-You-Go Platform
-              Plus, Create Your Own App and Earn Money Every Time It's Used!
+               Unlock a Universe of 1,000+ LLM Apps on Platform Plus,<br />Build Your Own Dream App in Minutes with your Imagination.
             </p> 
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
