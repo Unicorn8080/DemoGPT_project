@@ -44,7 +44,10 @@ export default function Layout({children}: {children:React.ReactNode}) {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen overflow-hidden bg-black">
+      <div
+        className="flex flex-col min-h-screen overflow-hidden"
+        style={{ backgroundColor: "#151719" }}
+      >
         <main className="grow">
           <PageIllustration />
 

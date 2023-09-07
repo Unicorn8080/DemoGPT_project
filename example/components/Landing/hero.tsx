@@ -51,7 +51,7 @@ export default function Hero() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h1
-              className="h1 mb-4 mt-20 text-9xl text-gray-100 font-bold"
+              className="h1 mb-4 mt-20 text-9xl text-gray-200 font-bold"
               data-aos="fade-up"
             >
               DemoGPT
