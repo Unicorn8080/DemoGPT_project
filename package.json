@@ -1,5 +1,5 @@
 {
-  "name": "open-pro-next",
+  "name": "windmill-dashboard-nextjs-typescript",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,24 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
-    "@headlessui/react": "^1.7.14",
-    "@types/node": "^20.2.5",
-    "@types/react": "^18.2.7",
-    "@types/react-dom": "^18.2.4",
-    "aos": "^3.0.0-beta.6",
-    "next": "^13.4.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-type-animation": "^3.1.0",
-    "typescript": "^5.0.4"
+    "@headlessui/react": "^1.7.17",
+    "aos": "^2.3.4",
+    "chart.js": "^3.6.1",
+    "classnames": "^2.3.1",
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-chartjs-2": "^4.3.1",
+    "react-dom": "17.0.2",
+    "react-type-animation": "^3.1.0"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
+    "@roketid/windmill-react-ui": "^0.1.1",
+    "@svgr/webpack": "^6.1.0",
     "@types/aos": "^3.0.4",
-    "@types/react-typing-animation": "^1.6.3",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2"
+    "@types/react": "17.0.21",
+    "autoprefixer": "^10.4.2",
+    "cssnano": "^5.0.12",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.3.3",
+    "typescript": "4.4.3"
   }
 }
