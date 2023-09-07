@@ -11,7 +11,6 @@ import "aos/dist/aos.css";
 
 import PageIllustration from "example/components/Landing/page-illustration";
 import Header from "example/components/Landing/ui/header";
-import Footer from "example/components/Landing/ui/footer";
 
 // const inter = Inter({
 //   subsets: ["latin"],
