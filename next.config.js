@@ -10,13 +10,13 @@ module.exports = {
 
     return config;
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/landingpage",
-        permanent: false,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/landingpage",
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
