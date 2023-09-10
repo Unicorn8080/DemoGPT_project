@@ -2,13 +2,19 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { GithubIcon, TwitterIcon } from 'icons'
+import { GoogleIcon } from 'icons'
 import { Input, Label, Button, WindmillContext } from '@roketid/windmill-react-ui'
+import { useGoogleLogin } from "@react-oauth/google";
 
 function CrateAccount() {
   const { mode } = useContext(WindmillContext)
   const imgSource = mode === 'dark' ? '/assets/img/create-account-office-dark.jpeg' : '/assets/img/create-account-office.jpeg'
-
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log(tokenResponse),
+    onError: (err) => {
+      console.log(err);
+    },
+  });
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -59,15 +65,10 @@ function CrateAccount() {
               <hr className="my-8" />
 
               <Button block layout="outline">
-                <GithubIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                Github
+                <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" onClick={() => googleLogin()} />
+                google
               </Button>
-              <Button block className="mt-4" layout="outline">
-                <TwitterIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                Twitter
-              </Button>
-
-              <p className="mt-4">
+                <p className="mt-4">
                 <Link href="/dashboard/login">
                   <a
                     className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
