@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from "@react-oauth/google";
 import dotenv from "dotenv";
 import {
   Label,
@@ -13,11 +13,10 @@ import { GoogleIcon } from "icons";
 import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
 
-
 dotenv.config();
 
 interface LoginPageProps {
-  path?: string 
+  path?: string;
 }
 
 const LoginPage = (props: LoginPageProps) => {
@@ -42,17 +41,21 @@ const LoginPage = (props: LoginPageProps) => {
   //     />
   //   );
   // }
-  
+
   const googleLogin = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      console.log(tokenResponse); 
+      console.log(tokenResponse);
       // const url = new URL(props);
-      if(props) {console.log(props)}
+      if (props) {
+        console.log(props);
+      }
       console.log("😀", props);
       router.push("/");
-      localStorage.setItem('token', JSON.stringify(tokenResponse));
+      localStorage.setItem("token", JSON.stringify(tokenResponse));
     },
-    onError: (err) => {console.log(err)}
+    onError: (err) => {
+      console.log(err);
+    },
   });
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -95,13 +98,9 @@ const LoginPage = (props: LoginPageProps) => {
                 </Button>
               </Link>
               <hr className="my-8" />
-              <Button
-                block
-                layout="outline"
-                onClick={() => googleLogin()}
-              >
+              <Button block layout="outline" onClick={() => googleLogin()}>
                 <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                sign in with google
+                Sign in with Google
               </Button>
               <p className="mt-4">
                 <Link href="/dashboard/forgot-password">

@@ -76,7 +76,7 @@ function CrateAccount() {
 
               <Button block layout="outline" onClick={() => googleLogin()}>
                 <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                sign in with google
+                Sign in with Google
               </Button>
               <p className="mt-4">
                 <Link href="/dashboard/login">
