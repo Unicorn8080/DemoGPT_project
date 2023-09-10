@@ -25,7 +25,7 @@ function CrateAccount() {
               className="object-cover w-full h-full"
               src={imgSource}
               alt="Office"
-              layout='fill'
+              layout="fill"
             />
           </div>
           <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
@@ -35,28 +35,38 @@ function CrateAccount() {
               </h1>
               <Label>
                 <span>Email</span>
-                <Input className="mt-1" type="email" placeholder="john@doe.com" />
+                <Input
+                  className="mt-1"
+                  type="email"
+                  placeholder="john@doe.com"
+                />
               </Label>
               <Label className="mt-4">
                 <span>Password</span>
-                <Input className="mt-1" placeholder="***************" type="password" />
+                <Input
+                  className="mt-1"
+                  placeholder="***************"
+                  type="password"
+                />
               </Label>
               <Label className="mt-4">
                 <span>Confirm password</span>
-                <Input className="mt-1" placeholder="***************" type="password" />
+                <Input
+                  className="mt-1"
+                  placeholder="***************"
+                  type="password"
+                />
               </Label>
 
               <Label className="mt-6" check>
                 <Input type="checkbox" />
                 <span className="ml-2">
-                  I agree to the <span className="underline">privacy policy</span>
+                  I agree to the{" "}
+                  <span className="underline">privacy policy</span>
                 </span>
               </Label>
 
-              <Link
-                  href='/dashboard/login'
-                  passHref={true}
-                >
+              <Link href="/dashboard/login" passHref={true}>
                 <Button block className="mt-4">
                   Create account
                 </Button>
@@ -64,15 +74,13 @@ function CrateAccount() {
 
               <hr className="my-8" />
 
-              <Button block layout="outline">
-                <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" onClick={() => googleLogin()} />
-                google
+              <Button block layout="outline" onClick={() => googleLogin()}>
+                <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+                sign in with google
               </Button>
-                <p className="mt-4">
+              <p className="mt-4">
                 <Link href="/dashboard/login">
-                  <a
-                    className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  >
+                  <a className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline">
                     Already have an account? Login
                   </a>
                 </Link>
@@ -82,7 +90,7 @@ function CrateAccount() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default CrateAccount

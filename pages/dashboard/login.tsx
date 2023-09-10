@@ -101,7 +101,7 @@ const LoginPage = (props: LoginPageProps) => {
                 onClick={() => googleLogin()}
               >
                 <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                google
+                sign in with google
               </Button>
               <p className="mt-4">
                 <Link href="/dashboard/forgot-password">
