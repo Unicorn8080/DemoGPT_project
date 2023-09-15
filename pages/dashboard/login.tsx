@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -12,6 +12,8 @@ import {
 import { GoogleIcon } from "icons";
 import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
+import axios from "axios";
+import { post } from './../../utils/utilities';
 
 dotenv.config();
 
@@ -19,7 +21,42 @@ interface LoginPageProps {
   path?: string;
 }
 
+const fetch = async (tokenData: any,flag: string, token:any ) => {
+   let data =
+    flag === "google"
+      ? {
+          token: tokenData,
+        }
+      : tokenData;
+  let bearerToken = flag === "google" ? tokenData.access_token??'' : token??'';
+  const url =
+    flag === "google"
+      ? "http://localhost:8000/auth/login/"
+      : "http://localhost:8000/auth/login/manual";
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: url,
+    headers: {
+      "Content-Type": "application/JSON",
+      "Authorization": `Bearer ${bearerToken}`
+    },
+    data: JSON.stringify(data),
+  };
+  axios
+    .request(config)
+    .then((response) => {
+      localStorage.setItem("token", response.data.token);
+      console.log(response, response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 const LoginPage = (props: LoginPageProps) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { user, login, logout } = useContext(AuthContext);
   const { mode } = useContext(WindmillContext);
   const router = useRouter();
@@ -27,29 +64,17 @@ const LoginPage = (props: LoginPageProps) => {
     mode === "dark"
       ? "/assets/img/login-office-dark.jpeg"
       : "/assets/img/login-office.jpeg";
-  const googleClientId = process.env.GOOGLE_CLIENT_ID;
-  // const google = () => {
-  //   return (
-  //     <GoogleLogin
-  //       onSuccess={(credentialResponse) => {
-  //         console.log(credentialResponse);
-  //       }}
-  //       onError={() => {
-  //         console.log("Login Failed");
-  //       }}
-  //       useOneTap
-  //     />
-  //   );
-  // }
-
   const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      console.log(tokenResponse);
-      // const url = new URL(props);
+    onSuccess: (tokenResponse: any) => {
+      console.log(
+        "tokenresponse=====",
+        tokenResponse,
+        JSON.parse(tokenResponse)
+      );
+      fetch(JSON.parse(tokenResponse), "google", "");
       if (props) {
         console.log(props);
       }
-      console.log("😀", props);
       router.push("/");
       localStorage.setItem("token", JSON.stringify(tokenResponse));
     },
@@ -57,6 +82,19 @@ const LoginPage = (props: LoginPageProps) => {
       console.log(err);
     },
   });
+
+  // manual login
+  const manualLogin = () => {
+    const data = {
+      email: email,
+      name: email,
+      password: password,
+    };
+    const token = localStorage.getItem('token');
+    fetch(data, "manual", token);
+    
+    // .then((res)=>console.log(res.data));
+  };
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -81,7 +119,9 @@ const LoginPage = (props: LoginPageProps) => {
                 <Input
                   className="mt-1"
                   type="email"
+                  value={email}
                   placeholder="john@doe.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Label>
               <Label className="mt-4">
@@ -89,11 +129,13 @@ const LoginPage = (props: LoginPageProps) => {
                 <Input
                   className="mt-1"
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="***************"
                 />
               </Label>
               <Link href="/dashboard" passHref={true}>
-                <Button className="mt-4" block>
+                <Button className="mt-4" onClick={() => manualLogin()} block>
                   Log in
                 </Button>
               </Link>

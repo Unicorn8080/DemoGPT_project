@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { GoogleIcon } from 'icons'
 import { Input, Label, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { useGoogleLogin } from "@react-oauth/google";
+import { post } from './../../utils/utilities'
 
 function CrateAccount() {
   const { mode } = useContext(WindmillContext)
@@ -15,6 +16,19 @@ function CrateAccount() {
       console.log(err);
     },
   });
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const data = {
+    email: email,
+    name: email,
+    password: password,
+  };
+
+  const signup = () => {
+    post("http://localhost:8000/auth/register",'', data).then((res) => console.log('signup successfully'));
+  }
+  
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -38,6 +52,8 @@ function CrateAccount() {
                 <Input
                   className="mt-1"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value) }
                   placeholder="john@doe.com"
                 />
               </Label>
@@ -47,6 +63,8 @@ function CrateAccount() {
                   className="mt-1"
                   placeholder="***************"
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Label>
               <Label className="mt-4">
@@ -67,7 +85,7 @@ function CrateAccount() {
               </Label>
 
               <Link href="/dashboard/login" passHref={true}>
-                <Button block className="mt-4">
+                <Button block className="mt-4" onClick={signup}>
                   Create account
                 </Button>
               </Link>

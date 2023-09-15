@@ -8,6 +8,7 @@ import React, {
 } from "react";
 
 import { useRouter } from "next/router";
+import { post } from "./../utils/utilities";
 
 interface User {
   name?: string;
@@ -31,20 +32,35 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem('token')
-    console.log(router.pathname)
-    // const storedUser = '{"name":"as", "email": "df"}';
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else if (storedToken) {
+  const blacklist = ["dashboard"];
 
-    } else if (router.pathname === '/') {
-      console.log('😀');
-    } else {
+  const validateUser = () => {
+    const token = localStorage.getItem("token");
+    console.log("token========>", token);
+    if (token) {
+      // post("http://localhost:8000/auth/whoami", "", { token }).then(
+      //   (res) => {
+      //     console.log("======", res);
+      //     if ((res.status = "200")) return true;
+      //     else return false;
+      //   }
+      // );
+      return true;
+    } else return false;
+  };
+  // router.pathname.includes()
+ 
+
+  useEffect(() => {
+    console.log(router.pathname);
+    console.log(validateUser());
+
+    if (
+      !validateUser() && router.pathname !== "/" &&
+      router.pathname !== "/dashboard/signup" &&
+      router.pathname !== "/dashboard/create-account"
+    ) {
       router.push("/dashboard/login");
-      // console.log(router.pathname);
     }
   }, [router.pathname]);
 
