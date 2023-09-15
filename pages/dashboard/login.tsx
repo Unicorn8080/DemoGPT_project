@@ -31,8 +31,8 @@ const fetch = async (tokenData: any,flag: string, token:any ) => {
   let bearerToken = flag === "google" ? tokenData.access_token??'' : token??'';
   const url =
     flag === "google"
-      ? "http://localhost:8000/auth/login/"
-      : "http://localhost:8000/auth/login/manual";
+      ? "https://demogpt-johnwilliam199024.b4a.run/auth/login/"
+      : "https://demogpt-johnwilliam199024.b4a.run/auth/login/manual";
   let config = {
     method: "post",
     maxBodyLength: Infinity,

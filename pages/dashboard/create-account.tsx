@@ -26,7 +26,11 @@ function CrateAccount() {
   };
 
   const signup = () => {
-    post("http://localhost:8000/auth/register",'', data).then((res) => console.log('signup successfully'));
+    post(
+      "https://demogpt-johnwilliam199024.b4a.run/auth/register",
+      "",
+      data
+    ).then((res) => console.log("signup successfully"));
   }
   
   return (
