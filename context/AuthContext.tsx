@@ -30,36 +30,42 @@ export const AuthContext = React.createContext<IAuthContext>({
 
 export const AuthContextProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loginState, setLoginState] = useState<boolean>(false);
+  console.log("login status", loginState);
   const router = useRouter();
 
   const blacklist = ["dashboard"];
 
-  const validateUser = () => {
+  const validateUser: () => void = () => {
     const token = localStorage.getItem("token");
-    console.log("token========>", token);
+    // console.log("token========>", token);
+    // let state;
     if (token) {
-      // post("http://localhost:8000/auth/whoami", "", { token }).then(
-      //   (res) => {
-      //     console.log("======", res);
-      //     if ((res.status = "200")) return true;
-      //     else return false;
-      //   }
-      // );
-      return true;
-    } else return false;
+      post("http://localhost:8000/auth/whoami", "", { token })
+        .then((res: Response) => {
+          console.log("======", res);
+          if (res.status === 200) setLoginState(true);
+          else setLoginState(true);
+        })
+        .catch((error: Error) => {
+          console.error("Error occurred", error);
+          setLoginState(true);
+        });
+    } else setLoginState(true);
   };
   // router.pathname.includes()
- 
 
   useEffect(() => {
     console.log(router.pathname);
-    console.log(validateUser());
+    validateUser();
+    console.log("validateUser====", loginState);
 
-    if (
-      !validateUser() && router.pathname !== "/" &&
-      router.pathname !== "/dashboard/signup" &&
+    if (!loginState &&
+      router.pathname !== "/" &&
+      router.pathname !== "/dashboard/verify-email" &&
       router.pathname !== "/dashboard/create-account"
     ) {
+      console.log("here")
       router.push("/dashboard/login");
     }
   }, [router.pathname]);

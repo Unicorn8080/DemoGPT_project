@@ -27,7 +27,7 @@ function CrateAccount() {
 
   const signup = () => {
     post(
-      "https://demogpt-johnwilliam199024.b4a.run/auth/register",
+      process.env.BACKEND_ADDRESS + "/auth/register",
       "",
       data
     ).then((res) => console.log("signup successfully"));

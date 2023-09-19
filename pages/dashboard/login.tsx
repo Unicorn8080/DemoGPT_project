@@ -15,43 +15,54 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { post } from './../../utils/utilities';
 
+
 dotenv.config();
 
 interface LoginPageProps {
   path?: string;
 }
 
-const fetch = async (tokenData: any,flag: string, token:any ) => {
-   let data =
+const fetch = async (
+  tokenData: any,
+  flag: string,
+  token: any
+): Promise<boolean> => {
+  console.log(process.env.BACKEND_ADDRESS);
+  let data =
     flag === "google"
       ? {
           token: tokenData,
         }
       : tokenData;
-  let bearerToken = flag === "google" ? tokenData.access_token??'' : token??'';
+  let bearerToken =
+    flag === "google" ? tokenData.access_token ?? "" : token ?? "";
   const url =
     flag === "google"
-      ? "https://demogpt-johnwilliam199024.b4a.run/auth/login/"
-      : "https://demogpt-johnwilliam199024.b4a.run/auth/login/manual";
+      ? process.env.BACKEND_ADDRESS + "/auth/login/"
+      : process.env.BACKEND_ADDRESS + "/auth/login/manual";
   let config = {
     method: "post",
     maxBodyLength: Infinity,
     url: url,
     headers: {
       "Content-Type": "application/JSON",
-      "Authorization": `Bearer ${bearerToken}`
+      Authorization: `Bearer ${bearerToken}`,
     },
     data: JSON.stringify(data),
   };
-  axios
-    .request(config)
-    .then((response) => {
-      localStorage.setItem("token", response.data.token);
-      console.log(response, response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  return new Promise<boolean>((resolve, reject) => {
+    axios
+      .request(config)
+      .then((response) => {
+        localStorage.setItem("token", response.data.token??null);
+        console.log(response, response.data);
+        resolve(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(false);
+      });
+  })
 };
 
 const LoginPage = (props: LoginPageProps) => {
@@ -65,13 +76,13 @@ const LoginPage = (props: LoginPageProps) => {
       ? "/assets/img/login-office-dark.jpeg"
       : "/assets/img/login-office.jpeg";
   const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse: any) => {
+    onSuccess: async (tokenResponse: any) => {
       console.log(
         "tokenresponse=====",
         tokenResponse,
         JSON.parse(tokenResponse)
       );
-      fetch(JSON.parse(tokenResponse), "google", "");
+      await fetch(JSON.parse(tokenResponse), "google", "");
       if (props) {
         console.log(props);
       }
@@ -81,20 +92,25 @@ const LoginPage = (props: LoginPageProps) => {
     onError: (err) => {
       console.log(err);
     },
-  });
+  }); 
 
   // manual login
-  const manualLogin = () => {
+  const manualLogin = async () => {
     const data = {
       email: email,
       name: email,
       password: password,
     };
     const token = localStorage.getItem('token');
-    fetch(data, "manual", token);
-    
+    const state = await fetch(data, "manual", token);
+    console.log('verifyState',state);
+    router.push("/dashboard/verify-email");
+    // setVerifyState(state);      
     // .then((res)=>console.log(res.data));
   };
+  // useEffect(() => {
+
+  // },[verifyState]) 
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
