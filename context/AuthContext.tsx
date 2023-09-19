@@ -40,8 +40,9 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     const token = localStorage.getItem("token");
     // console.log("token========>", token);
     // let state;
+    const url = process.env.BACKEND_ADDRESS + "/auth/whoami";
     if (token) {
-      post("http://localhost:8000/auth/whoami", "", { token })
+      post(url, "", { token })
         .then((res: Response) => {
           console.log("======", res);
           if (res.status === 200) setLoginState(true);
